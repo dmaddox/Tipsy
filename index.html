@@ -2,9 +2,55 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Document</title>
+	<title>Tipsy</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
+	<h1>Tipsy: Virtual Bartender</h1>
+	<form class="ingredients-search">	
+		<div class="form-group">
+			<h3><label for="alcohol-types">What types of alcohol do you currently have?</label></h3>
+		    <button class="ingredient alc" id="vodka">Vodka</button>
+		    <button class="ingredient alc" id="Whiskey">Whiskey</button>
+		    <button class="ingredient alc" id="Rum">Rum</button>
+		    <button class="ingredient alc">Tequila</button>
+		    <button class="ingredient alc">Gin</button>
+		</div>
+		<div class="form-group">
+			<h3><label for="mixer-types">What types of mixers or other ingredients do you have?</label></h3>
+	    	<button class="ingredient mixer">Orange Juice</button>
+	    	<button class="ingredient mixer">Soda</button>
+	    	<button class="ingredient mixer">Tonic</button>
+	    	<button class="ingredient mixer">Sprite</button>
+	    	<button class="ingredient mixer">Coke</button>
+		</div>
+		<div id="submission-details">
+			
+		</div>
+		<button type="submit" id="submit">Submit</button>
+	</form>
 	
 </body>
+<script type="text/javascript">
+	// initialize variable for user's search query
+	var choice;
+
+	// when user clicks button, the variable is set
+	$(".ingredient").on("click", function(event){
+		event.preventDefault();
+		var choice = $(this).text();
+		console.log(choice);
+		// display user's choice after button select
+		$("#submission-details").html("<h4>You are about to search for cocktails made with: <strong>" + choice + "</strong>.</h4>");
+	});
+
+	$("submit").on("click", function(event){
+		event.preventDefault();
+		//pass info off to api call
+		console.log(choice);
+		//display results
+	});
+
+
+</script>
 </html>
