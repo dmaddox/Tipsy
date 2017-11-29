@@ -16,4 +16,12 @@ body {
 .list-group-item {
 	color: black;
 }
+#drink-list {
+	position: fixed;
+	top:10px;
+	bottom: 10px;
+	right: 10px;
+	left: 10px;
+	overflow-y: scroll;
+	visibility: hidden;
 }
