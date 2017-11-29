@@ -26,6 +26,17 @@
 		    <button class="ingredient alc">Tequila</button>
 		    <button class="ingredient alc">Gin</button>
 		</div>
+		<form action="/action_page.php" method="get">
+  <input list="browsers" name="browser">
+  <datalist id="browsers">
+    <option value="Internet Explorer">
+    <option value="Firefox">
+    <option value="Chrome">
+    <option value="Opera">
+    <option value="Safari">
+  </datalist>
+  <input type="submit">
+</form>
 		<div class="form-group">
 			<h3><label for="mixer-types">What types of mixers or other ingredients do you have?</label></h3>
 	    	<button class="ingredient mixer">Orange Juice</button>
@@ -34,11 +45,41 @@
 	    	<button class="ingredient mixer">Sprite</button>
 	    	<button class="ingredient mixer">Coke</button>
 		</div>
+		<form action="/action_page.php" method="get">
+  <input list="browsers" name="browser">
+  <datalist id="browsers">
+    <option value="Internet Explorer">
+    <option value="Firefox">
+    <option value="Chrome">
+    <option value="Opera">
+    <option value="Safari">
+  </datalist>
+  <input type="submit">
+</form>
 		<div id="submission-details">
 			
 		</div>
 		<button type="submit" id="submit">Submit</button>
 	</form>
+	
+	<div class="card" style="width: 20rem;">
+  <div class="card-header">
+    Your Liqours:
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item"></li>
+   </ul>
+</div>
+<span>
+	<div class="card" style="width: 20rem;">
+ 		<div class="card-header">
+   		Your Mixers:
+		</div>
+ 		<ul class="list-group list-group-flush">
+    	<li class="list-group-item"></li>
+  		</ul>
+	</div>
+</span>
 	</div>
 	
 
