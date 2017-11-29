@@ -21,7 +21,7 @@ $("#submit").on("click", function() {
   event.preventDefault();
   console.log(qText);
   // builds the API request URL to get cocktail name results
-  var qURL = "http://www.thecocktaildb.com/api/json/v1/1/filter.php?i=" + qText;
+  var qURL = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=" + qText;
   console.log(qURL);
   // AJAX request
   $.get(qURL).done(function(response) {
@@ -35,7 +35,7 @@ $("#submit").on("click", function() {
     if (drinkIds.length > 0) {
       for (j = 0; j < drinkIds.length; j++) {
         // 2nd API call to get recipe details
-        var qURL2 = "http://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=" + drinkIds[j];
+        var qURL2 = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=" + drinkIds[j];
         $.get(qURL2).done(function(response) {
           var dHtml = "";
           var results2 = response.drinks[0];
