@@ -40,7 +40,6 @@ $("#submit").on("click", function() {
           var dHtml = "";
           var results2 = response.drinks[0];
           console.log(results2);
-          //dHtml += '<div class="search-result">\n' +
           dHtml += '<img src="' + results2.strDrinkThumb + '" style="float: left; width: 120px; height: 120px;">\n' +
                     '<strong>' + results2.strDrink + '</strong>\n';
           for (k = 1; k <= 15; k++) {
@@ -56,14 +55,12 @@ $("#submit").on("click", function() {
           }
           dHtml += '<p><strong>Ingredients</strong>: ' + results2.strInstructions + '</p>\n';
           if (results2.strGlass.length > 0) {
-            dHtml += '<p><strong>Ingredients</strong>: ' + results2.strGlass + '</p>\n';
+            dHtml += '<p><strong>Glass</strong>: ' + results2.strGlass + '</p>\n';
           }
-          // MISSING INGREDIENTS
-          //dHtml += '</div>\n';
+          // TO DO: HANDLE MISSING INGREDIENTS (INCLUDED IN RECIPE, NOT IN SEARCH)
           var newDiv = document.createElement('div');
           newDiv.innerHTML = dHtml;
           document.getElementById("drink-list").appendChild(newDiv);
-          //document.getElementById("drink-list").innerHTML = dHtml;
           //console.log(dHtml);
         });
       }
