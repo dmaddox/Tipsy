@@ -3,12 +3,21 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Tipsy</title>
+	<!--Bootstrap CDN-->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="assets/style.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 	<!-- Jquery Library -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 </head>
 <body>
-	<h1>Tipsy: Virtual Bartender</h1>
-	<form class="ingredients-search">	
+	<div class="jumbotron jumbotron-fluid">
+  		<div class="container">
+    		<h1 class="display-3">TIPSY</h1>
+    		<p class="lead">Your Virtual Bartender</p>
+  		</div>
+  		<form class="ingredients-search">	
 		<div class="form-group">
 			<h3><label for="alcohol-types">What types of alcohol do you currently have?</label></h3>
 		    <button class="ingredient alc" id="vodka">Vodka</button>
@@ -30,6 +39,8 @@
 		</div>
 		<button type="submit" id="submit">Submit</button>
 	</form>
+	</div>
+	
 
 	<!-- Display Search Results -->
 	<section id="drink-list"></section>
@@ -37,5 +48,9 @@
 </body>
 <!-- Javascript for querying recipes API -->
 <script src="assets/javascript/recipes.js"></script>
+<<<<<<< HEAD
 <script src="assets/javascript/idGetter.js"></script>
+=======
+<script src="assets/javascript/shop.js"></script>
+>>>>>>> 3b981a6c8416395550f23f88b10bb37c47b2971b
 </html>
