@@ -1,5 +1,5 @@
 // initialize variable for user's search query
-  var choice = '';
+var choice = '';
 
 // when user clicks an ingredients button, the variable is set
 $(".ingredient").on("click", function(event){
@@ -13,7 +13,7 @@ $(".ingredient").on("click", function(event){
 });
 
 // selected choice becomes the query text variable 'qText'
-var qText = "";
+var qText = choice;
 
 // submit button queries API
 $("#submit").on("click", function() {
@@ -34,13 +34,14 @@ $("#submit").on("click", function() {
     console.log(drinkIds);
     document.getElementById("drink-list").innerHTML = "";
     if (drinkIds.length > 0) {
+      console.log("drinksIds array has stuff");
       for (j = 0; j < drinkIds.length; j++) {
         // 2nd API call to get recipe details
         var qURL2 = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=" + drinkIds[j];
         $.get(qURL2).done(function(response) {
           var dHtml = "";
           var results2 = response.drinks[0];
-          // console.log(results2);
+          console.log(results2);
           dHtml += '<div class="drink-img" style="display: inline-block; vertical-align: top;">\n' +
                     '<img src="' + results2.strDrinkThumb.trim() + '" style="width: 120px; height: 120px;">\n' +
                     '</div>\n' +
@@ -65,6 +66,7 @@ $("#submit").on("click", function() {
           // TO DO: HANDLE MISSING INGREDIENTS (INCLUDED IN RECIPE, NOT IN SEARCH)
           var newDiv = document.createElement('div');
           newDiv.innerHTML = dHtml;
+          console.log(newDiv);
           document.getElementById("drink-list").appendChild(newDiv);
           //console.log(dHtml);
         });

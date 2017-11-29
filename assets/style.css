@@ -16,6 +16,8 @@ body {
 .list-group-item {
 	color: black;
 }
+/*
+HIDING THIS FOR NOW B/C IT WAS HIDING #drink-list BELOW-THE-FOLD
 #drink-list {
 	position: fixed;
 	top:10px;
@@ -23,5 +25,5 @@ body {
 	right: 10px;
 	left: 10px;
 	overflow-y: scroll;
-	visibility: hidden;
-}
+	/*visibility: hidden;*/
+}/*
