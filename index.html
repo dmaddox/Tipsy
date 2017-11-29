@@ -3,6 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Tipsy</title>
+	<!-- Jquery Library -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
@@ -30,29 +31,10 @@
 		<button type="submit" id="submit">Submit</button>
 	</form>
 
-	<section class="results_section"></section>
+	<!-- Display Search Results -->
+	<section id="drink-list"></section>
 	
 </body>
-<script type="text/javascript">
-	// initialize variable for user's search query
-	var choice;
-
-	// when user clicks button, the variable is set
-	$(".ingredient").on("click", function(event){
-		event.preventDefault();
-		var choice = $(this).text();
-		console.log(choice);
-		// display user's choice after button select
-		$("#submission-details").html("<h4>You are about to search for cocktails made with: <strong>" + choice + "</strong>.</h4>");
-	});
-
-	$("submit").on("click", function(event){
-		event.preventDefault();
-		//pass info off to api call
-		console.log(choice);
-		//display results
-	});
-
-
-</script>
+<!-- Javascript for querying recipes API -->
+<script src="assets/javascript/recipes.js"></script>
 </html>
