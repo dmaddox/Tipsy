@@ -3,33 +3,99 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Tipsy</title>
+	<!-- Popper CDN -->
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+	<!--Bootstrap CDN-->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="assets/style.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 	<!-- Jquery Library -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 </head>
 <body>
-	<h1>Tipsy: Virtual Bartender</h1>
-	<form class="ingredients-search">	
-		<div class="form-group">
-			<h3><label for="alcohol-types">What types of alcohol do you currently have?</label></h3>
-		    <button class="ingredient alc" id="vodka">Vodka</button>
-		    <button class="ingredient alc" id="Whiskey">Whiskey</button>
-		    <button class="ingredient alc" id="Rum">Rum</button>
-		    <button class="ingredient alc">Tequila</button>
-		    <button class="ingredient alc">Gin</button>
-		</div>
-		<div class="form-group">
-			<h3><label for="mixer-types">What types of mixers or other ingredients do you have?</label></h3>
-	    	<button class="ingredient mixer">Orange Juice</button>
-	    	<button class="ingredient mixer">Soda</button>
-	    	<button class="ingredient mixer">Tonic</button>
-	    	<button class="ingredient mixer">Sprite</button>
-	    	<button class="ingredient mixer">Coke</button>
-		</div>
-		<div id="submission-details">
-			
-		</div>
-		<button type="submit" id="submit">Submit</button>
-	</form>
+	<!-- Start of Jumbotron -->
+	<div class="jumbotron jumbotron-fluid">
+
+		<!-- Start of container for the header & sub-header -->
+  		<div class="container">
+    		<h1 class="display-3">TIPSY</h1>
+    		<p class="lead">Your Virtual Bartender</p>
+  		</div><!-- End of container for the header & sub-header -->
+
+  		<!-- Begin Form -->
+  		<form class="ingredients-search" action="/action_page.php" method="get">	
+			<!-- Type of Alcohol Selector -->
+			<div class="form-group">
+				<h3><label for="alcohol-types">What types of alcohol do you currently have?</label></h3>
+			    <button class="ingredient alc" id="vodka">Vodka</button>
+			    <button class="ingredient alc" id="Whiskey">Whiskey</button>
+			    <button class="ingredient alc" id="Rum">Rum</button>
+			    <button class="ingredient alc">Tequila</button>
+			    <button class="ingredient alc">Gin</button>
+			</div>
+			<!-- Placeholder for future Alcohol Selector Dropdown -->
+			<div class="form-group">	
+			  <input list="browsers" name="browser">
+			  <datalist id="browsers">
+			    <option value="Internet Explorer">
+			    <option value="Firefox">
+			    <option value="Chrome">
+			    <option value="Opera">
+			    <option value="Safari">
+			  </datalist>
+			  <button type="submit" id="add">Add</button>
+		  	</div>
+			<!-- Type of Mixer Selector -->
+			<div class="form-group">
+				<h3><label for="mixer-types">What types of mixers or other ingredients do you have?</label></h3>
+		    	<button class="ingredient mixer">Orange Juice</button>
+		    	<button class="ingredient mixer">Soda</button>
+		    	<button class="ingredient mixer">Tonic</button>
+		    	<button class="ingredient mixer">Sprite</button>
+		    	<button class="ingredient mixer">Coke</button>
+			</div>
+			<!-- Placeholder for future Mixer Selector Dropdown -->
+			<div class="form-group">
+			  <input list="browsers" name="browser">
+			  <datalist id="browsers">
+			    <option value="Internet Explorer">
+			    <option value="Firefox">
+			    <option value="Chrome">
+			    <option value="Opera">
+			    <option value="Safari">
+			  </datalist>
+			  <button type="submit" id="add">Add</button>
+			</div>
+			<div id="submission-details">
+				<!-- DEFAULT: EMPTY => Placeholder for displaying the user's current selection -->
+			</div>
+			<button type="submit" id="submit">Submit</button>
+		</form><!-- End of Form -->
+	
+		<!-- Begin "Your Liquors" Card -->
+		<div class="card" style="width: 20rem;">
+	  		<div class="card-header">
+	    		Your Liqours:
+			</div>
+	  		<ul class="list-group list-group-flush">
+	    	<li class="list-group-item"></li>
+	  		</ul>
+		</div><!-- End "Your Liquors" Card -->
+
+		<!-- Begin "Your Mixers Liquors" Card -->
+		<div class="card" style="width: 20rem;">
+	 		<div class="card-header">
+	   			Your Mixers:
+			</div>
+	 		<ul class="list-group list-group-flush">
+	    	<li class="list-group-item"></li>
+	  		</ul>
+		</div><!-- End "Your Mixers Liquors" Card -->
+		
+	</div><!-- End of Jumbotron -->
+	
 
 	<!-- Display Search Results -->
 	<section id="drink-list"></section>

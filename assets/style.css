@@ -1,0 +1,27 @@
+.jumbotron {
+	background-image: url("pouring.jpg");
+	background-size: cover;
+	color: white;
+	text-align: center;
+}
+body {
+	
+}
+.form-group {
+
+}
+.card {
+	background-color: black;
+}
+.list-group-item {
+	color: black;
+}
+#drink-list {
+	position: fixed;
+	top:10px;
+	bottom: 10px;
+	right: 10px;
+	left: 10px;
+	overflow-y: scroll;
+	visibility: hidden;
+}
