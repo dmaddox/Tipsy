@@ -1,7 +1,7 @@
 function shopGlass() {
   console.log(qGlass);
   // builds the API request URL to get cocktail name results
-  var queryURL = "http://api.walmartlabs.com/v1/search?apiKey=vcn53dyhzmzmxzmg2krfxddy&query=" + qGlass + "&categoryId=4044&sort=bestseller";
+  var queryURL = "https://api.walmartlabs.com/v1/search?apiKey=vcn53dyhzmzmxzmg2krfxddy&query=" + qGlass + "&categoryId=4044&sort=bestseller";
   // AJAX request
   $.ajax({
       url: queryURL,
