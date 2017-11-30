@@ -123,8 +123,3 @@ $(document).on("click", "#shop", function() {
       };
   });
 });
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 2e895db2d1a4c381ca59d601c114eb15937482d6
