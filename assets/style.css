@@ -16,6 +16,11 @@ body {
 .list-group-item {
 	color: black;
 }
+
+li {
+	color: black;
+	background-color: white;
+}
 /*
 HIDING THIS FOR NOW B/C IT WAS HIDING #drink-list BELOW-THE-FOLD
 #drink-list {

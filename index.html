@@ -38,9 +38,9 @@
 			</div>
 			<!-- Placeholder for future Alcohol Selector Dropdown -->
 			<div class="form-group">	
-			  <input list="sel-alcohol" name="alcohol">
+			  <input list="sel-alcohol" id="alcohol">
 			  <datalist id="sel-alcohol"></datalist>
-			  <button type="submit" id="add">Add</button>
+			  <button type="submit" id="alcoholAdd">Add</button>
 		  	</div>
 			<!-- Type of Mixer Selector -->
 			<div class="form-group">
@@ -54,9 +54,9 @@
 			<!-- THIS IS DANIELLE'S TEST COMMENT - FIGURING OUT GIT COORDINATION -->
 			<!-- Placeholder for future Mixer Selector Dropdown -->
 			<div class="form-group">
-			  <input list="sel-mixer" name="mixer">
+			  <input list="sel-mixer" id="mixer">
 			  <datalist id="sel-mixer"></datalist>
-			  <button type="submit" id="add">Add</button>
+			  <button type="submit" id="mixerAdd">Add</button>
 			</div>
 			<div id="submission-details">
 				<!-- DEFAULT: EMPTY => Placeholder for displaying the user's current selection -->
@@ -65,20 +65,20 @@
 		</form><!-- End of Form -->
 	
 		<!-- Begin "Your Liquors" Card -->
-		<div id="liquors" class="card" style="width: 20rem;">
+		<div class="card" style="width: 20rem;">
 	  		<div class="card-header">
 	    		Your Liqours:
 			</div>
-	  		<ul class="list-group list-group-flush">
+	  		<ul id="liquors" class="list-group list-group-flush">
 	  		</ul>
 		</div><!-- End "Your Liquors" Card -->
 
 		<!-- Begin "Your Mixers Liquors" Card -->
-		<div id="mixers" class="card" style="width: 20rem;">
+		<div class="card" style="width: 20rem;">
 	 		<div class="card-header">
 	   			Your Mixers:
 			</div>
-	 		<ul class="list-group list-group-flush">
+	 		<ul id="mixers" class="list-group list-group-flush">
 	  		</ul>
 		</div><!-- End "Your Mixers Liquors" Card -->
 		
