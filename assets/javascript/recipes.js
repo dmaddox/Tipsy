@@ -4,6 +4,22 @@ var cocktails = [];
 var glass = '';
 var shopRecos;
 
+// load alcohol filters into first dropdown
+for (i = 0; i < alcList.length; i++) {
+  var alcInput = document.getElementById('sel-alcohol');
+  var newOpt = document.createElement('option');
+  newOpt.value = alcList[i];
+  alcInput.appendChild(newOpt);
+}
+
+// load mixer filters into second dropdown
+for (j = 0; j < mixList.length; j++) {
+  var mixInput = document.getElementById('sel-mixer');
+  var newOpt = document.createElement('option');
+  newOpt.value = mixList[j];
+  mixInput.appendChild(newOpt);
+}
+
 // when user clicks an ingredients button, the variable is set
 $(".ingredient").on("click", function(event){
   // prevent the button from refreshing the page
@@ -82,16 +98,13 @@ $("#submit").on("click", function() {
           if (results2.strGlass.length > 0) {
             dHtml += '<p class="drink-glass"><strong>Glass</strong>: <span class="glass-val">' + results2.strGlass.trim() + '</span> - <button id="shop">Shop for Glass</button></p>\n';
           }
-          dHtml += '</div><div class="shop-results"></div>';
-
+          dHtml += '</div>';
           // TO DO: HANDLE MISSING INGREDIENTS (INCLUDED IN RECIPE, NOT IN SEARCH)
           var newDiv = document.createElement('div');
-          newDiv.classList.add("drink-recipe");
           newDiv.innerHTML = dHtml;
           console.log(newDiv);
           document.getElementById("drink-list").appendChild(newDiv);
           //console.log(dHtml);
-
         });
       }
     }
@@ -100,9 +113,9 @@ $("#submit").on("click", function() {
 
 // Shop for glass type
 $(document).on("click", "#shop", function() {
-  var drinkOfChoice = $(this).parent().parent().next();
   glass = $(this).prev().text();
   console.log(glass);
+  var drinkOfChoice = $(this).parent();
   console.log(drinkOfChoice);
   console.log("i clicked");
   // builds the API request URL to get cocktail name results
@@ -117,16 +130,14 @@ $(document).on("click", "#shop", function() {
       shopRecos = products;
       console.log(shopRecos);
       // display shopping results
-      var newUL = $("<ul>");
       for (s = 0; s < shopRecos.length; s++) {
         if (shopRecos[s].availableOnline) {
-          var resultLI = $("<li>");
-          resultLI.addClass("recommendation");
-          resultLI.text(shopRecos[s].name + " : " + shopRecos[s].salePrice);
-          newUL.append(resultLI);
+          var resultDiv = $("<div>");
+          resultDiv.text(shopRecos[s].name + " : " + shopRecos[s].salePrice);
+          drinkOfChoice.append(resultDiv);
          }
       };
-      drinkOfChoice.html(newUL);
   });
-
 });
+
+
