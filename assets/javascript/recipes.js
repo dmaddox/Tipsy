@@ -4,6 +4,22 @@ var cocktails = [];
 var glass = '';
 var shopRecos;
 
+// load alcohol filters into first dropdown
+for (i = 0; i < alcList.length; i++) {
+  var alcInput = document.getElementById('sel-alcohol');
+  var newOpt = document.createElement('option');
+  newOpt.value = alcList[i];
+  alcInput.appendChild(newOpt);
+}
+
+// load mixer filters into second dropdown
+for (j = 0; j < mixList.length; j++) {
+  var mixInput = document.getElementById('sel-mixer');
+  var newOpt = document.createElement('option');
+  newOpt.value = mixList[j];
+  mixInput.appendChild(newOpt);
+}
+
 // when user clicks an ingredients button, the variable is set
 $(".ingredient").on("click", function(event){
   // prevent the button from refreshing the page
