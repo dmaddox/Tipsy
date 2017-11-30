@@ -128,4 +128,5 @@ $(document).on("click", "#shop", function() {
       };
       drinkOfChoice.html(newUL);
   });
+
 });
