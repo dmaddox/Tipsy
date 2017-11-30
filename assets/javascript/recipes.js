@@ -114,13 +114,16 @@ $("#submit").on("click", function() {
           if (results2.strGlass.length > 0) {
             dHtml += '<p class="drink-glass"><strong>Glass</strong>: <span class="glass-val">' + results2.strGlass.trim() + '</span> - <button id="shop">Shop for Glass</button></p>\n';
           }
-          dHtml += '</div>';
+          dHtml += '</div><div class="shop-results"></div>';
+
           // TO DO: HANDLE MISSING INGREDIENTS (INCLUDED IN RECIPE, NOT IN SEARCH)
           var newDiv = document.createElement('div');
+          newDiv.classList.add("drink-recipe");
           newDiv.innerHTML = dHtml;
           console.log(newDiv);
           document.getElementById("drink-list").appendChild(newDiv);
           //console.log(dHtml);
+
         });
       }
     }
@@ -129,9 +132,9 @@ $("#submit").on("click", function() {
 
 // Shop for glass type
 $(document).on("click", "#shop", function() {
+  var drinkOfChoice = $(this).parent().parent().next();
   glass = $(this).prev().text();
   console.log(glass);
-  var drinkOfChoice = $(this).parent();
   console.log(drinkOfChoice);
   console.log("i clicked");
   // builds the API request URL to get cocktail name results
@@ -146,14 +149,16 @@ $(document).on("click", "#shop", function() {
       shopRecos = products;
       console.log(shopRecos);
       // display shopping results
+      var newUL = $("<ul>");
       for (s = 0; s < shopRecos.length; s++) {
         if (shopRecos[s].availableOnline) {
-          var resultDiv = $("<div>");
-          resultDiv.text(shopRecos[s].name + " : " + shopRecos[s].salePrice);
-          drinkOfChoice.append(resultDiv);
+          var resultLI = $("<li>");
+          resultLI.addClass("recommendation");
+          resultLI.text(shopRecos[s].name + " : " + shopRecos[s].salePrice);
+          newUL.append(resultLI);
          }
       };
+      drinkOfChoice.html(newUL);
   });
+
 });
-
-
