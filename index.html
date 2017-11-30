@@ -29,7 +29,7 @@
   		<form class="ingredients-search" action="/action_page.php" method="get">	
 			<!-- Type of Alcohol Selector -->
 			<div class="form-group">
-				<h3><label for="alcohol-types">What types of alcohol do you currently have?</label></h3>
+				<h3>What types of alcohol do you currently have?</h3>
 			    <button class="ingredient alc" id="vodka">Vodka</button>
 			    <button class="ingredient alc" id="Whiskey">Whiskey</button>
 			    <button class="ingredient alc" id="Rum">Rum</button>
@@ -38,19 +38,13 @@
 			</div>
 			<!-- Placeholder for future Alcohol Selector Dropdown -->
 			<div class="form-group">	
-			  <input list="browsers" name="browser">
-			  <datalist id="browsers">
-			    <option value="Internet Explorer">
-			    <option value="Firefox">
-			    <option value="Chrome">
-			    <option value="Opera">
-			    <option value="Safari">
-			  </datalist>
+			  <input list="sel-alcohol" name="alcohol">
+			  <datalist id="sel-alcohol"></datalist>
 			  <button type="submit" id="add">Add</button>
 		  	</div>
 			<!-- Type of Mixer Selector -->
 			<div class="form-group">
-				<h3><label for="mixer-types">What types of mixers or other ingredients do you have?</label></h3>
+				<h3>What types of mixers or other ingredients do you have?</h3>
 		    	<button class="ingredient mixer">Orange Juice</button>
 		    	<button class="ingredient mixer">Soda</button>
 		    	<button class="ingredient mixer">Tonic</button>
@@ -60,14 +54,8 @@
 			<!-- THIS IS DANIELLE'S TEST COMMENT - FIGURING OUT GIT COORDINATION -->
 			<!-- Placeholder for future Mixer Selector Dropdown -->
 			<div class="form-group">
-			  <input list="browsers" name="browser">
-			  <datalist id="browsers">
-			    <option value="Internet Explorer">
-			    <option value="Firefox">
-			    <option value="Chrome">
-			    <option value="Opera">
-			    <option value="Safari">
-			  </datalist>
+			  <input list="sel-mixer" name="mixer">
+			  <datalist id="sel-mixer"></datalist>
 			  <button type="submit" id="add">Add</button>
 			</div>
 			<div id="submission-details">
@@ -104,5 +92,6 @@
 	
 </body>
 <!-- Javascript for querying recipes API -->
+<script src="assets/javascript/lists.js"></script>
 <script src="assets/javascript/recipes.js"></script>
 </html>
