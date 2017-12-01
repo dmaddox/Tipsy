@@ -3,23 +3,34 @@ var choice = '';
 var cocktails = [];
 var glass = '';
 var shopRecos;
+var filterAlc = [], filterMix = [];
 
+// handle add alcohol button
 $("#alcoholAdd").on("click",function(event){
   event.preventDefault();
   var atype = $("#alcohol").val().trim();
-  var newAlc = $("<li>");
-  newAlc.html(atype);
-  $("#liquors").append(newAlc);
-  $("#alcohol").val("");
+  if (atype.length > 0) {
+    var newAlc = $("<li>");
+    newAlc.text(atype);
+    $("#liquors").append(newAlc);
+    $("#alcohol").val("");
+    filterAlc.push(atype);
+  }
 });
+
+// handle add mixer button
 $("#mixerAdd").on("click",function(event){
   event.preventDefault();
   var mtype = $("#mixer").val().trim();
-  var newMix = $("<li>");
-  newMix.text(mtype);
-  $("#mixers").append(newMix);
-  $("#mixer").val("");
+  if (mtype.length > 0) {
+    var newMix = $("<li>");
+    newMix.text(mtype);
+    $("#mixers").append(newMix);
+    $("#mixer").val("");
+    filterMix.push(mtype);
+  }
 });
+
 // load alcohol filters into first dropdown
 for (i = 0; i < alcList.length; i++) {
   var alcInput = document.getElementById('sel-alcohol');
