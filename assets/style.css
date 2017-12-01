@@ -39,7 +39,7 @@ li {
 	overflow: auto;
 	text-align: left;
 	vertical-align:top;
-	overflow: auto;
+	overflow: hidden;
 	/*border: 1px solid;*/
 	box-shadow: 1px 2px 2px 1px #888888;
 }
