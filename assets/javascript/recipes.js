@@ -217,5 +217,8 @@ $(document).on("click", ".drink-recipe", function() {
       // append the parent ul, now with all each of the recommendations, to the .drink-recipe class
       drinkOfChoice.html(newUL);
   });
+  // recipe card resize function
   $(this).find(".drink-info, .drink-inst, .drink-glass, .shop-results").toggle();
 });
+
+
