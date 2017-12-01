@@ -18,7 +18,16 @@ body {
 	color: black;
 }
 
+<<<<<<< HEAD
 
+=======
+li {
+	color: black;
+	background-color: white;
+}
+/*
+HIDING THIS FOR NOW B/C IT WAS HIDING #drink-list BELOW-THE-FOLD
+>>>>>>> 37eb0acb4be08615cb314cd6c185c25a7d49ceb7
 #drink-list {
  width: 100%;
  padding: 50px;
