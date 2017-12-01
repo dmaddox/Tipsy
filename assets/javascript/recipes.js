@@ -86,7 +86,7 @@ $("#submit").on("click", function() {
           var results2 = response.drinks[0];
           console.log(results2);
           cocktails.push(results2);
-          dHtml += '<div class="drink-img" style="display: inline-block; vertical-align: top;">\n' +
+          dHtml += '<div class="drink-img" >\n' +
                     '<img src="' + results2.strDrinkThumb.trim() + '" ">\n' +
                     '</div>\n' +
                     '<div class="drink-name"><h4>' + results2.strDrink.trim() + '</h4></div>\n' +
@@ -120,6 +120,10 @@ $("#submit").on("click", function() {
           // TO DO: HANDLE MISSING INGREDIENTS (INCLUDED IN RECIPE, NOT IN SEARCH)
           var newDiv = document.createElement('div');
           newDiv.classList.add("drink-recipe");
+          newDiv.classList.add("col-md-4");
+          newDiv.classList.add("col-sm-5");
+          newDiv.classList.add("mx-2");
+          newDiv.classList.add("px-0");
           newDiv.innerHTML = dHtml;
           console.log(newDiv);
           document.getElementById("drink-list").appendChild(newDiv);
@@ -134,7 +138,7 @@ $("#submit").on("click", function() {
 // Shop for glass type
 $(document).on("click", "#shop", function() {
   // save .drink-recipe class that is the great-grand-parent of the clicked shop button
-  var drinkOfChoice = $(this).parent().parent().next();
+  var drinkOfChoice = $(this).parent().next();
   // save the glass type text which precedes the button
   glass = $(this).prev().text();
   // builds the API request URL to get cocktail name results
