@@ -17,6 +17,7 @@ body {
 .list-group-item {
 	color: black;
 }
+
 li {
 	color: black;
 	background-color: white;
@@ -49,5 +50,10 @@ li {
 .drink-img img {
 	width: 300px;
 }
-
+.drink-name, .drink-info, .drink-inst, .drink-glass, .shop-results {
+	padding: 10px 5px;
+}
+.drink-name {
+	text-align: center;
+}
 
