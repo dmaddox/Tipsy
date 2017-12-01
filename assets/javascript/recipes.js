@@ -182,5 +182,6 @@ $(document).on("click", ".drink-recipe", function() {
       // append the parent ul, now with all each of the recommendations, to the .drink-recipe class
       drinkOfChoice.html(newUL);
   });
+  $(this).css("width": "600px");
   $(this).find(".drink-info, .drink-inst, .drink-glass, .shop-results").toggle();
 });
