@@ -64,10 +64,9 @@ $("#submit").on("click", function() {
   // only run if at least 1 alcohol has been added to the search list
   if (filterAlc.length > 0) {
     qText = filterAlc[0];
-    console.log(qText);
     // builds the API request URL to get cocktail name results
     var qURL = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=" + qText;
-    console.log(qURL);
+    // console.log(qURL);
     // AJAX request
     $.ajax({
         url: qURL,
@@ -79,7 +78,7 @@ $("#submit").on("click", function() {
         for (i = 0; i < results.length; i++) {
           drinkIds.push(results[i].idDrink);
       }
-      console.log(drinkIds);
+      // console.log(drinkIds);
       document.getElementById("drink-list").innerHTML = "";
       if (drinkIds.length > 0) {
         console.log("drinksIds array has stuff");
@@ -93,36 +92,39 @@ $("#submit").on("click", function() {
           }).done(function(response) {
             var results2 = response.drinks[0];
             console.log(results2);
-            // START: LOOP TO FILTER RESULTS THAT DON'T MATCH ALL SEARCH CRITERIA
-            // STILL NEEDS WORK!!!
-            var bFound = true;
+            // START: LOOP TO FILTER RESULTS THAT DON'T INCLUDE ALL SEARCHED-FOR INGREDIENTS
+            var bFound = true, bTemp = false;
             if (filterAlc.length > 1 || filterMix.length > 0) {
-              console.log("searching for matching ingredients");
-              // loop all search criteria to verify each is present in list of ingredients
-              bFound = false;
-              for (k1 = 1; (k1 <= 15 && !bFound); k1++) {
-                var bTemp = false;
-                if (!(results2["strIngredient" + k1] == null)) {
-                  if (results2["strIngredient" + k1].trim().length > 0) {
-                    // filterAlc search loop
-                    // start at filterAlc[1] since filterAlc[0] will always be included in list of ingredients
-                    for (n1 = 1; (n1 < filterAlc.length && !bTemp); n1++) {
+              // filterAlc search loop
+              for (n1 = 1; (n1 < filterAlc.length && bFound); n1++) {
+                bTemp = false;
+                for (k1 = 1; (k1 <= 15 && !bTemp); k1++) {
+                  if (!(results2["strIngredient" + k1] == null)) {
+                    if (results2["strIngredient" + k1].trim().length > 0) {
                       if (results2["strIngredient" + k1].trim().toLowerCase() == filterAlc[n1].toLowerCase()) {
-                        console.log("found: " + filterAlc[n1]);
-                        bTemp = true;
-                      }
-                    }
-                    // filterMix search loop
-                    for (n2 = 0; (n2 < filterMix.length && !bTemp); n2++) {
-                      if (results2["strIngredient" + k1].trim().toLowerCase() == filterMix[n2].toLowerCase()) {
-                        console.log("found: " + filterMix[n2]);
                         bTemp = true;
                       }
                     }
                   }
                 }
-                if (bTemp) {
-                  bFound = true;
+                if (!bTemp) {
+                  bFound = false;
+                }
+              }
+              // filterMix search loop
+              for (n2 = 0; (n2 < filterMix.length && bFound); n2++) {
+                bTemp = false
+                for (k2 = 1; (k2 <= 15 && !bTemp); k2++) {
+                  if (!(results2["strIngredient" + k2] == null)) {
+                    if (results2["strIngredient" + k2].trim().length > 0) {
+                      if (results2["strIngredient" + k2].trim().toLowerCase() == filterMix[n2].toLowerCase()) {
+                        bTemp = true;
+                      }
+                    }
+                  }
+                }
+                if (!bTemp) {
+                  bFound = false;
                 }
               }
               // END: FILTER LOOP
