@@ -49,5 +49,10 @@ li {
 .drink-img img {
 	width: 300px;
 }
-
+.drink-name, .drink-info, .drink-inst, .drink-glass, .shop-results {
+	padding: 10px 5px;
+}
+.drink-name {
+	text-align: center;
+}
 
