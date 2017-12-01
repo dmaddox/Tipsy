@@ -110,10 +110,10 @@ $("#submit").on("click", function() {
             }
           }
           // add the instructions to dHtml
-          dHtml += '</ul></div><p class="drink-inst"><h5>Instructions</h5>' + results2.strInstructions.trim() + '</p>\n';
+          dHtml += '</ul></div><div class="drink-inst"><h5>Instructions</h5>' + results2.strInstructions.trim() + '</div>\n';
           // if a glass type exists, add it to the dHtml
           if (results2.strGlass.length > 0) {
-            dHtml += '<p class="drink-glass"><h5>Glass</h5><span class="glass-val">' + results2.strGlass.trim() + '</span> - <button id="shop">Shop for Glass</button></p>\n';
+            dHtml += '<div class="drink-glass"><h5>Glass</h5><span class="glass-val">' + results2.strGlass.trim() + '</span> - <button id="shop">Shop for Glass</button></div>\n';
           }
           dHtml += '<div class="shop-results"></div>';
 
