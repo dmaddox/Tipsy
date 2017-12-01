@@ -86,7 +86,7 @@ $("#submit").on("click", function() {
           var results2 = response.drinks[0];
           console.log(results2);
           cocktails.push(results2);
-          dHtml += '<div class="drink-img" style="display: inline-block; vertical-align: top;">\n' +
+          dHtml += '<div class="drink-img" >\n' +
                     '<img src="' + results2.strDrinkThumb.trim() + '" ">\n' +
                     '</div>\n' +
                     '<div class="drink-name"><h4>' + results2.strDrink.trim() + '</h4></div>\n' +
@@ -113,30 +113,35 @@ $("#submit").on("click", function() {
           dHtml += '</ul></div><div class="drink-inst"><h5>Instructions</h5>' + results2.strInstructions.trim() + '</div>\n';
           // if a glass type exists, add it to the dHtml
           if (results2.strGlass.length > 0) {
-            dHtml += '<div class="drink-glass"><h5>Glass</h5><span class="glass-val">' + results2.strGlass.trim() + '</span> - <button id="shop">Shop for Glass</button></div>\n';
+            dHtml += '<div class="drink-glass"><h5>' + results2.strGlass.trim() + '</h5></div>\n';
           }
           dHtml += '<div class="shop-results"></div>';
 
           // TO DO: HANDLE MISSING INGREDIENTS (INCLUDED IN RECIPE, NOT IN SEARCH)
           var newDiv = document.createElement('div');
           newDiv.classList.add("drink-recipe");
+          newDiv.classList.add("col-md-4");
+          newDiv.classList.add("col-sm-5");
+          newDiv.classList.add("mx-2");
+          newDiv.classList.add("px-0");
           newDiv.innerHTML = dHtml;
           console.log(newDiv);
           document.getElementById("drink-list").appendChild(newDiv);
           //console.log(dHtml);
-
+          $(".drink-info, .drink-inst, .drink-glass, .shop-results").hide();
         });
       }
     }
   });  
+  // hide all blah
 });
 
-// Shop for glass type
-$(document).on("click", "#shop", function() {
-  // save .drink-recipe class that is the great-grand-parent of the clicked shop button
-  var drinkOfChoice = $(this).parent().parent().next();
+
+// When a user clicks a recipe, toggle between show/hide all recipe details & shopping details 
+$(document).on("click", ".drink-recipe", function() {
+  var drinkOfChoice = $(this).find(".shop-results");
   // save the glass type text which precedes the button
-  glass = $(this).prev().text();
+  glass = $(this).find(".drink-glass").text();
   // builds the API request URL to get cocktail name results
   var queryURL = "https://api.walmartlabs.com/v1/search?apiKey=vcn53dyhzmzmxzmg2krfxddy&query=" + glass + "&categoryId=4044&sort=bestseller";
   // AJAX request
@@ -166,5 +171,5 @@ $(document).on("click", "#shop", function() {
       // append the parent ul, now with all each of the recommendations, to the .drink-recipe class
       drinkOfChoice.html(newUL);
   });
-
+  $(this).find(".drink-info, .drink-inst, .drink-glass, .shop-results").toggle();
 });
