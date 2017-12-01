@@ -8,6 +8,9 @@ body {
 	width: 100%;
 	
 }
+h5 {
+	font-size: 18px;
+}
 .form-group {
 
 }
@@ -31,18 +34,16 @@ li {
 .drink-recipe {
 	width: 300px;
 	margin-bottom: 25px;
-	background-color: lightblue;
+	/*background-color: lightblue;*/
 	display:inline-block;
 	overflow: auto;
 	text-align: left;
 	vertical-align:top;
 	overflow: auto;
-	border: 1px solid;
-	box-shadow: 2px 2px 2px #888888;
+	/*border: 1px solid;*/
+	box-shadow: 1px 2px 2px 1px #888888;
 }
-.drink-recipe li {
-	background-color: lightblue;
-}
+
 .drink-img {
 	/*margin: auto;*/
 	text-align: center;

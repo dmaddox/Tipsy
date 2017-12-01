@@ -120,8 +120,8 @@ $("#submit").on("click", function() {
           // TO DO: HANDLE MISSING INGREDIENTS (INCLUDED IN RECIPE, NOT IN SEARCH)
           var newDiv = document.createElement('div');
           newDiv.classList.add("drink-recipe");
-          newDiv.classList.add("col-md-4");
-          newDiv.classList.add("col-sm-5");
+          // newDiv.classList.add("col-md-4");
+          // newDiv.classList.add("col-sm-5");
           newDiv.classList.add("mx-2");
           newDiv.classList.add("px-0");
           newDiv.innerHTML = dHtml;
