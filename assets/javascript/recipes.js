@@ -3,29 +3,22 @@ var choice = '';
 var cocktails = [];
 var glass = '';
 var shopRecos;
-var filterAlc = [], filterMix = [];
 
 $("#alcoholAdd").on("click",function(event){
   event.preventDefault();
   var atype = $("#alcohol").val().trim();
-  if (atype.length > 0) {
-    var newAlc = $("<li>");
-    newAlc.text(atype);
-    $("#liquors").append(newAlc);
-    $("#alcohol").val("");
-    filterAlc.push(atype);
-  }
+  var newAlc = $("<li>");
+  newAlc.html(atype);
+  $("#liquors").append(newAlc);
+  $("#alcohol").val("");
 });
 $("#mixerAdd").on("click",function(event){
   event.preventDefault();
   var mtype = $("#mixer").val().trim();
-  if (mtype.length > 0) {
-    var newMix = $("<li>");
-    newMix.text(mtype);
-    $("#mixers").append(newMix);
-    $("#mixer").val("");
-    filterMix.push(mtype);
-  }
+  var newMix = $("<li>");
+  newMix.text(mtype);
+  $("#mixers").append(newMix);
+  $("#mixer").val("");
 });
 // load alcohol filters into first dropdown
 for (i = 0; i < alcList.length; i++) {
@@ -61,128 +54,94 @@ var qText = choice;
 $("#submit").on("click", function() {
   // prevents submit button from refreshing page
   event.preventDefault();
-  // only run if at least 1 alcohol has been added to the search list
-  if (filterAlc.length > 0) {
-    qText = filterAlc[0];
-    console.log(qText);
-    // builds the API request URL to get cocktail name results
-    var qURL = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=" + qText;
-    console.log(qURL);
-    // AJAX request
-    $.ajax({
-        url: qURL,
-        dataType: "json",
-        method: "GET"
-    }).done(function(response) {
-        var results = response.drinks;
-        var drinkIds = [];
-        for (i = 0; i < results.length; i++) {
-          drinkIds.push(results[i].idDrink);
-      }
-      console.log(drinkIds);
-      document.getElementById("drink-list").innerHTML = "";
-      if (drinkIds.length > 0) {
-        console.log("drinksIds array has stuff");
-        for (j = 0; j < drinkIds.length; j++) {
-          // 2nd API call to get recipe details
-          var qURL2 = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=" + drinkIds[j];
-          $.ajax({
-              url: qURL2,
-              dataType: "json",
-              method: "GET"
-          }).done(function(response) {
-            var results2 = response.drinks[0];
-            console.log(results2);
-            // START: LOOP TO FILTER RESULTS THAT DON'T MATCH ALL SEARCH CRITERIA
-            // STILL NEEDS WORK!!!
-            var bFound = true;
-            if (filterAlc.length > 1 || filterMix.length > 0) {
-              console.log("searching for matching ingredients");
-              // loop all search criteria to verify each is present in list of ingredients
-              bFound = false;
-              for (k1 = 1; (k1 <= 15 && !bFound); k1++) {
-                var bTemp = false;
-                if (!(results2["strIngredient" + k1] == null)) {
-                  if (results2["strIngredient" + k1].trim().length > 0) {
-                    // filterAlc search loop
-                    // start at filterAlc[1] since filterAlc[0] will always be included in list of ingredients
-                    for (n1 = 1; (n1 < filterAlc.length && !bTemp); n1++) {
-                      if (results2["strIngredient" + k1].trim().toLowerCase() == filterAlc[n1].toLowerCase()) {
-                        console.log("found: " + filterAlc[n1]);
-                        bTemp = true;
-                      }
-                    }
-                    // filterMix search loop
-                    for (n2 = 0; (n2 < filterMix.length && !bTemp); n2++) {
-                      if (results2["strIngredient" + k1].trim().toLowerCase() == filterMix[n2].toLowerCase()) {
-                        console.log("found: " + filterMix[n2]);
-                        bTemp = true;
-                      }
-                    }
-                  }
-                }
-                if (bTemp) {
-                  bFound = true;
-                }
+  qText = choice;
+  console.log(qText);
+  // builds the API request URL to get cocktail name results
+  var qURL = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=" + qText;
+  console.log(qURL);
+  // AJAX request
+  $.ajax({
+      url: qURL,
+      dataType: "json",
+      method: "GET"
+  }).done(function(response) {
+      var results = response.drinks;
+      var drinkIds = [];
+      for (i = 0; i < results.length; i++) {
+        drinkIds.push(results[i].idDrink);
+    }
+    console.log(drinkIds);
+    document.getElementById("drink-list").innerHTML = "";
+    if (drinkIds.length > 0) {
+      console.log("drinksIds array has stuff");
+      for (j = 0; j < drinkIds.length; j++) {
+        // 2nd API call to get recipe details
+        var qURL2 = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=" + drinkIds[j];
+        $.ajax({
+            url: qURL2,
+            dataType: "json",
+            method: "GET"
+        }).done(function(response) {
+          var dHtml = "";
+          var results2 = response.drinks[0];
+          console.log(results2);
+          cocktails.push(results2);
+          dHtml += '<div class="drink-img" >\n' +
+                    '<img src="' + results2.strDrinkThumb.trim() + '" ">\n' +
+                    '</div>\n' +
+                    '<div class="drink-name"><h4>' + results2.strDrink.trim() + '</h4></div>\n' +
+                    '<div class="drink-info" style="display: inline-block; vertical-align: top;">\n' +
+                    '<h5>Ingredients:</h5><ul>\n';
+          // loop through the result's ingredients list to build the ingredients  details
+          for (k = 1; k <= 15; k++) {
+            // if an ingredients item is not null
+            if (!(results2["strIngredient" + k] == null)) {
+              // and is greater than 0 characters in length
+              if (results2["strIngredient" + k].trim().length > 0) {
+                // add a paragraph element to dHtml
+                dHtml += '<li class="drink-ingr">';
+                // if there is a specified measurement
+                if (results2["strMeasure" + k].trim().length > 0) {
+                  // add the measurement info to dHtml
+                  dHtml += results2["strMeasure" + k].trim() + ' ';
+                } // then add the ingredient item to the dHtml
+                dHtml += results2["strIngredient" + k].trim() + '</li>\n';
               }
-              // END: FILTER LOOP
             }
-            // only add result2 if bFound == true
-            if (bFound) {
-              var dHtml = "";
-              cocktails.push(results2);
-              dHtml += '<div class="drink-img" style="display: inline-block; vertical-align: top;">\n' +
-                        '<img src="' + results2.strDrinkThumb.trim() + '" ">\n' +
-                        '</div>\n' +
-                        '<div class="drink-name"><h4>' + results2.strDrink.trim() + '</h4></div>\n' +
-                        '<div class="drink-info" style="display: inline-block; vertical-align: top;">\n' +
-                        '<h5>Ingredients:</h5><ul>\n';
-              // loop through the result's ingredients list to build the ingredients  details
-              for (k2 = 1; k2 <= 15; k2++) {
-                // if an ingredients item is not null
-                if (!(results2["strIngredient" + k2] == null)) {
-                  // and is greater than 0 characters in length
-                  if (results2["strIngredient" + k2].trim().length > 0) {
-                    // add a paragraph element to dHtml
-                    dHtml += '<li class="drink-ingr">';
-                    // if there is a specified measurement
-                    if (results2["strMeasure" + k2].trim().length > 0) {
-                      // add the measurement info to dHtml
-                      dHtml += results2["strMeasure" + k2].trim() + ' ';
-                    } // then add the ingredient item to the dHtml
-                    dHtml += results2["strIngredient" + k2].trim() + '</li>\n';
-                  }
-                }
-              }
-              // add the instructions to dHtml
-              dHtml += '</ul></div><div class="drink-inst"><h5>Instructions</h5>' + results2.strInstructions.trim() + '</div>\n';
-              // if a glass type exists, add it to the dHtml
-              if (results2.strGlass.length > 0) {
-                dHtml += '<div class="drink-glass"><h5>Glass</h5><span class="glass-val">' + results2.strGlass.trim() + '</span> - <button id="shop">Shop for Glass</button></div>\n';
-              }
-              dHtml += '<div class="shop-results"></div>';
+          }
+          // add the instructions to dHtml
+          dHtml += '</ul></div><div class="drink-inst"><h5>Instructions</h5>' + results2.strInstructions.trim() + '</div>\n';
+          // if a glass type exists, add it to the dHtml
+          if (results2.strGlass.length > 0) {
+            dHtml += '<div class="drink-glass"><h5>' + results2.strGlass.trim() + '</h5></div>\n';
+          }
+          dHtml += '<div class="shop-results"></div>';
 
-              // TO DO: HANDLE MISSING INGREDIENTS (INCLUDED IN RECIPE, NOT IN SEARCH)
-              var newDiv = document.createElement('div');
-              newDiv.classList.add("drink-recipe");
-              newDiv.innerHTML = dHtml;
-              console.log(newDiv);
-              document.getElementById("drink-list").appendChild(newDiv);
-              //console.log(dHtml);
-            }
-          });
-        }
+          // TO DO: HANDLE MISSING INGREDIENTS (INCLUDED IN RECIPE, NOT IN SEARCH)
+          var newDiv = document.createElement('div');
+          newDiv.classList.add("drink-recipe");
+          newDiv.classList.add("col-md-4");
+          newDiv.classList.add("col-sm-5");
+          newDiv.classList.add("mx-2");
+          newDiv.classList.add("px-0");
+          newDiv.innerHTML = dHtml;
+          console.log(newDiv);
+          document.getElementById("drink-list").appendChild(newDiv);
+          //console.log(dHtml);
+          $(".drink-info, .drink-inst, .drink-glass, .shop-results").hide();
+        });
       }
-    });
-  }
+    }
+  });  
+  // hide all blah
 });
 
-// Shop for glass type
-$(document).on("click", "#shop", function() {
-  // save .drink-recipe class that is the great-grand-parent of the clicked shop button
-  var drinkOfChoice = $(this).parent().parent().next();
+
+// When a user clicks a recipe, toggle between show/hide all recipe details & shopping details 
+$(document).on("click", ".drink-recipe", function() {
+  var drinkOfChoice = $(this).find(".shop-results");
   // save the glass type text which precedes the button
-  glass = $(this).prev().text();
+  glass = $(this).find(".drink-glass").text();
   // builds the API request URL to get cocktail name results
   var queryURL = "https://api.walmartlabs.com/v1/search?apiKey=vcn53dyhzmzmxzmg2krfxddy&query=" + glass + "&categoryId=4044&sort=bestseller";
   // AJAX request
@@ -212,5 +171,5 @@ $(document).on("click", "#shop", function() {
       // append the parent ul, now with all each of the recommendations, to the .drink-recipe class
       drinkOfChoice.html(newUL);
   });
-
+  $(this).find(".drink-info, .drink-inst, .drink-glass, .shop-results").toggle();
 });
