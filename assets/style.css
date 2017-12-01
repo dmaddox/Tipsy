@@ -5,6 +5,7 @@
 	text-align: center;
 }
 body {
+	width: 100%;
 	
 }
 .form-group {
@@ -16,14 +17,26 @@ body {
 .list-group-item {
 	color: black;
 }
-/*
-HIDING THIS FOR NOW B/C IT WAS HIDING #drink-list BELOW-THE-FOLD
+
+
 #drink-list {
-	position: fixed;
-	top:10px;
-	bottom: 10px;
-	right: 10px;
-	left: 10px;
-	overflow-y: scroll;
-	/*visibility: hidden;*/
-}/*
+ width: 100%;
+ padding: 50px;
+}
+.drink-recipe {
+	margin: 25px 0;
+	padding: 5px;
+	border: 1px solid;
+}
+
+.drink-img {
+	background-color: lightgrey;
+
+}
+.drink-img img {
+	width: 300px;
+}
+.drink-info {
+	background-color: pink;
+	width: 600px;	
+}
