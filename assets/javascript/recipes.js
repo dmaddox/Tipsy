@@ -8,7 +8,7 @@ $("#alcoholAdd").on("click",function(event){
   event.preventDefault();
   var atype = $("#alcohol").val().trim();
   var newAlc = $("<li>");
-  newAlc.text(atype);
+  newAlc.html(atype);
   $("#liquors").append(newAlc);
   $("#alcohol").val("");
 });
