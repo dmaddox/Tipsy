@@ -4,7 +4,7 @@
 	color: white;
 	text-align: center;
 }
-body {
+html, body {
 	width: 100%;
 	  margin: 0;
 	
@@ -62,25 +62,31 @@ li {
   border-radius: 3px;
   max-width: 600px;
   margin: 50px auto;
-  padding: 20px;
+  padding: 25px;
   color: black;
 }
 .showing-modal {
   overflow: hidden;
 }
-.drink-img {
-	/*margin: auto;*/
-	text-align: center;
-}
 .drink-img img {
-	width: 300px;
+	max-width: 300px;
+	margin:auto;
 }
-.drink-name, .drink-info, .drink-inst, .drink-glass, .shop-results {
+.drink-info, .drink-inst, .drink-glass, .shop-results {
 	text-align: left;
-	padding: 10px 5px;
+	padding: 10px 0;
 }
 .drink-name {
 	text-align: center;
+}
+.modal-right {
+	float: right;
+	display: inline-block;
+}
+
+.modal-inner .drink-img img {
+	max-width: 100%;
+	height: auto;
 }
 
 

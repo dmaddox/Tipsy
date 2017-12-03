@@ -135,11 +135,11 @@ $("#submit").on("click", function() {
             if (bFound) {
               var dHtml = "";
               cocktails.push(results2);
-              dHtml += '<div class="drink-img" style="display: inline-block; vertical-align: top;">\n' +
-                        '<img src="' + results2.strDrinkThumb.trim() + '" ">\n' +
+              dHtml += '<div class="drink-name"><h4>' + results2.strDrink.trim() + '</h4></div>\n' +
+                        '<div class="drink-img">\n' +
+                        '<img class="img-fluid" src="' + results2.strDrinkThumb.trim() + '" ">\n' +
                         '</div>\n' +
-                        '<div class="drink-name"><h4>' + results2.strDrink.trim() + '</h4></div>\n' +
-                        '<div class="drink-info" style="display: inline-block; vertical-align: top;">\n' +
+                        '<div class="drink-info">\n' +
                         '<h5>Ingredients:</h5><ul>\n';
               // loop through the result's ingredients list to build the ingredients  details
               for (k2 = 1; k2 <= 15; k2++) {
@@ -201,6 +201,11 @@ function openModal() {
   $(".modal-inner").find(".shop-results").html(productRecoUL);
   // display all parts
   $(".modal-inner").find(".drink-info, .drink-inst, .drink-glass, .shop-results").toggle();
+  // add wrapping div around name & ingredients
+  $(".modal-inner").find(".drink-info").wrap("<div class='modal-right col-sm-6 col-xs-12 pl-sm-5 pl-sm-0 pr-0'></div>");
+  // add a wrapping div around .drink-img and the newly created .modal-right
+  $(".modal-inner").find(".drink-img, .modal-right").wrapAll("<div class='row mx-0 px-0'></div>");
+  $(".modal-inner").find(".drink-img").addClass("col-sm-6 col-xs-12 px-0");
     // setup modal
       // measure witdh
       var scrollBarWidth = window.innerWidth - document.body.offsetWidth;
