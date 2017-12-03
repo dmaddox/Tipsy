@@ -4,6 +4,8 @@ var cocktails = [];
 var glass = '';
 var shopRecos;
 var filterAlc = [], filterMix = [];
+var thisVar;
+var productRecoUL;
 
 $("#alcoholAdd").on("click",function(event){
   event.preventDefault();
@@ -160,15 +162,13 @@ $("#submit").on("click", function() {
               dHtml += '</ul></div><div class="drink-inst"><h5>Instructions</h5>' + results2.strInstructions.trim() + '</div>\n';
               // if a glass type exists, add it to the dHtml
               if (results2.strGlass.length > 0) {
-                dHtml += '<div class="drink-glass"><h5>Glass</h5><span class="glass-val">' + results2.strGlass.trim() + '</span> - <button id="shop">Shop for Glass</button></div>\n';
+                dHtml += '<div class="drink-glass"><h5>' + results2.strGlass.trim() + '</h5></div>\n';
               }
               dHtml += '<div class="shop-results"></div>';
 
               // TO DO: HANDLE MISSING INGREDIENTS (INCLUDED IN RECIPE, NOT IN SEARCH)
               var newDiv = document.createElement('div');
               newDiv.classList.add("drink-recipe");
-              newDiv.classList.add("col-md-4");
-              newDiv.classList.add("col-sm-5");
               newDiv.classList.add("mx-2");
               newDiv.classList.add("px-0");
               newDiv.innerHTML = dHtml;
@@ -187,9 +187,47 @@ $("#submit").on("click", function() {
 
 // When a user clicks a recipe, toggle between show/hide all recipe details & shopping details 
 $(document).on("click", ".drink-recipe", function() {
-  var drinkOfChoice = $(this).find(".shop-results");
+  thisVar = $(this);
+  shopForGlass();
+  openModal();
+  // $(this).find(".drink-info, .drink-inst, .drink-glass, .shop-results").toggle();
+});
+
+// function to switch classes
+function openModal() {
+  // place the clicked recipe card's html into the pop-up modal
+  $(".modal-inner").html(thisVar.html());
+  // append the ul created in shopForGlass(), now with all each of the product recommendations, to the modal
+  $(".modal-inner").find(".shop-results").html(productRecoUL);
+  // display all parts
+  $(".modal-inner").find(".drink-info, .drink-inst, .drink-glass, .shop-results").toggle();
+    // setup modal
+      // measure witdh
+      var scrollBarWidth = window.innerWidth - document.body.offsetWidth;
+      $("body").css('margin-right', scrollBarWidth);
+      // add overflow: hidden; to the body
+      $("body").addClass("showing-modal");
+      // display modal
+      $('#modal').show();
+};
+
+// Clicking outside the inner modal content should close it.
+$('#modal').find('.modal-inner').click(function (event) {
+    // prevent parent element from running off event
+    event.stopPropagation();
+  });
+$('#modal').click(function () {
+    //close modal
+    $('body').css('margin-right', '').removeClass('showing-modal');
+    $('#modal').hide();
+  })
+
+// function to run Walmart shopping API query
+function shopForGlass() {
+  // save the drink type
+  var drinkOfChoice = thisVar.find(".shop-results");
   // save the glass type text which precedes the button
-  glass = $(this).find(".drink-glass").text();
+  glass = thisVar.find(".drink-glass").text();
   // builds the API request URL to get cocktail name results
   var queryURL = "https://api.walmartlabs.com/v1/search?apiKey=vcn53dyhzmzmxzmg2krfxddy&query=" + glass + "&categoryId=4044&sort=bestseller";
   // AJAX request
@@ -200,8 +238,9 @@ $(document).on("click", ".drink-recipe", function() {
   }).done(function(response) {
     // store the response object
       shopRecos = response.items;
+      console.log(shopRecos);
       // build the html that will display the shopping recommendations
-      var newUL = $("<ul>");
+      productRecoUL = $("<ul>");
       // loop through each recommendation
       for (s = 0; s < shopRecos.length; s++) {
         // verify the recommendation is available for online purchase
@@ -212,15 +251,12 @@ $(document).on("click", ".drink-recipe", function() {
           resultLI.addClass("recommendation");
           // build the text for the li
           resultLI.text(shopRecos[s].name + " : " + shopRecos[s].salePrice);
+          console.log(resultLI.html());
           // append the li to the ul parent
-          newUL.append(resultLI);
+          productRecoUL.append(resultLI);
+          console.log(productRecoUL.html());
          }
       };
-      // append the parent ul, now with all each of the recommendations, to the .drink-recipe class
-      drinkOfChoice.html(newUL);
+      console.log(productRecoUL.html());
   });
-  // recipe card resize function
-  $(this).find(".drink-info, .drink-inst, .drink-glass, .shop-results").toggle();
-});
-
-
+};
