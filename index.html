@@ -33,7 +33,7 @@
   		</div><!-- End of container for the header & sub-header -->
 
   		<!-- Begin Form -->
-  		<form class="ingredients-search" action="/action_page.php" method="get">	
+  		<form class="ingredients-search">	
 			<!-- Type of Alcohol Selector -->
 			<div class="form-group">
 				<h3>What types of alcohol do you currently have?</h3>
@@ -44,6 +44,8 @@
 			  <datalist id="sel-alcohol"></datalist>
 			  <button type="submit" id="alcoholAdd">Add</button>
 		  	</div>
+	  	</form>
+	  	<form class="ingredients-search">
 			<!-- Type of Mixer Selector -->
 			<div class="form-group">
 				<h3>What types of mixers or other ingredients do you have?</h3>
@@ -55,6 +57,8 @@
 			  <datalist id="sel-mixer"></datalist>
 			  <button type="submit" id="mixerAdd">Add</button>
 			</div>
+		</form>
+		<form class="ingredients-search">
 			<div id="submission-details">
 				<!-- DEFAULT: EMPTY => Placeholder for displaying the user's current selection -->
 			</div>

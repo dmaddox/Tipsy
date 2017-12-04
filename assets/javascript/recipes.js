@@ -9,6 +9,29 @@ var productRecoUL;
 
 $("#alcoholAdd").on("click",function(event){
   event.preventDefault();
+  addAlcohol();
+});
+
+$("#alcoholAdd").on("keyup",function(event){
+  event.preventDefault();
+  if (event.keyCode == 13) {
+    addAlcohol();
+  }
+});
+
+$("#mixerAdd").on("click",function(event){
+  event.preventDefault();
+  addMixer();
+});
+
+$("#mixerAdd").on("keyup",function(event){
+  event.preventDefault();
+  if (event.keyCode == 13) {
+    addMixer();
+  }
+});
+
+function addAlcohol() {
   var atype = $("#alcohol").val().trim();
   if (atype.length > 0) {
     var newAlc = $("<li>");
@@ -17,9 +40,9 @@ $("#alcoholAdd").on("click",function(event){
     $("#alcohol").val("");
     filterAlc.push(atype);
   }
-});
-$("#mixerAdd").on("click",function(event){
-  event.preventDefault();
+}
+
+function addMixer() {
   var mtype = $("#mixer").val().trim();
   if (mtype.length > 0) {
     var newMix = $("<li>");
@@ -28,7 +51,8 @@ $("#mixerAdd").on("click",function(event){
     $("#mixer").val("");
     filterMix.push(mtype);
   }
-});
+}
+
 // load alcohol filters into first dropdown
 for (i = 0; i < alcList.length; i++) {
   var alcInput = document.getElementById('sel-alcohol');
