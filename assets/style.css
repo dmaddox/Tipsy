@@ -60,7 +60,7 @@ li {
 .modal-inner {
   background-color: #fff;
   border-radius: 3px;
-  max-width: 600px;
+  max-width: 800px;
   margin: 50px auto;
   padding: 25px;
   color: black;
@@ -88,5 +88,32 @@ li {
 	max-width: 100%;
 	height: auto;
 }
+.shopper {
+    width: 70%;
+    margin: 0px auto;
+    color: black;
+}
+.slick-slide {
+  margin: 0px 10px;
+}
 
+.slick-slide img {
+  width: 100%;
+}
 
+.slick-prev:before,
+.slick-next:before {
+  color: black;
+}
+.slick-slide {
+  transition: all ease-in-out .3s;
+  opacity: .2;
+}
+
+.slick-active {
+  opacity: .5;
+}
+
+.slick-current {
+  opacity: 1;
+}

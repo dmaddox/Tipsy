@@ -189,7 +189,7 @@ $("#submit").on("click", function() {
 $(document).on("click", ".drink-recipe", function() {
   thisVar = $(this);
   shopForGlass();
-  openModal();
+
   // $(this).find(".drink-info, .drink-inst, .drink-glass, .shop-results").toggle();
 });
 
@@ -197,7 +197,7 @@ $(document).on("click", ".drink-recipe", function() {
 function openModal() {
   // place the clicked recipe card's html into the pop-up modal
   $(".modal-inner").html(thisVar.html());
-  // append the ul created in shopForGlass(), now with all each of the product recommendations, to the modal
+  // add the product recommendations to the modal
   $(".modal-inner").find(".shop-results").html(productRecoUL);
   // display all parts
   $(".modal-inner").find(".drink-info, .drink-inst, .drink-glass, .shop-results").toggle();
@@ -214,6 +214,14 @@ function openModal() {
       $("body").addClass("showing-modal");
       // display modal
       $('#modal').show();
+  // Slick carousel Initialization
+  $(".modal-inner").find(".shopper").slick({
+    swipeToSlide: true,
+    infinite: true,
+    centerMode: true,
+    slidesToShow: 2,
+    slidesToScroll: 1
+  });
 };
 
 // Clicking outside the inner modal content should close it.
@@ -226,6 +234,7 @@ $('#modal').click(function () {
     $('body').css('margin-right', '').removeClass('showing-modal');
     $('#modal').hide();
   })
+
 
 // function to run Walmart shopping API query
 function shopForGlass() {
@@ -245,23 +254,34 @@ function shopForGlass() {
       shopRecos = response.items;
       console.log(shopRecos);
       // build the html that will display the shopping recommendations
-      productRecoUL = $("<ul>");
+      productRecoUL = $("<div>");
+      productRecoUL.addClass("shopper");
+      // productRecoUL.addClass("owl-theme");
       // loop through each recommendation
       for (s = 0; s < shopRecos.length; s++) {
         // verify the recommendation is available for online purchase
         if (shopRecos[s].availableOnline) {
           // build a new LI
-          var resultLI = $("<li>");
+          var resultLI = $("<div>");
           // add the .recommendation class to the li
           resultLI.addClass("recommendation");
           // build the text for the li
           resultLI.text(shopRecos[s].name + " : " + shopRecos[s].salePrice);
+          var resultImg = ($("<img>"));
+          resultImg.attr("src", shopRecos[s].imageEntities[0].largeImage);
+          resultLI.prepend(resultImg);
           console.log(resultLI.html());
           // append the li to the ul parent
           productRecoUL.append(resultLI);
           console.log(productRecoUL.html());
-         }
-      };
+         }; // if statement
+      }; //end loop
       console.log(productRecoUL.html());
+      // call the openModal function
+      openModal();
   });
+  //open modal
+   
 };
+
+
