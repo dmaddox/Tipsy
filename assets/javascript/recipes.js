@@ -119,7 +119,6 @@ $("#submit").on("click", function() {
               method: "GET"
           }).done(function(response) {
             var results2 = response.drinks[0];
-            console.log(results2);
             // START: LOOP TO FILTER RESULTS THAT DON'T INCLUDE ALL SEARCHED-FOR INGREDIENTS
             var bFound = true, bTemp = false;
             if (filterAlc.length > 1 || filterMix.length > 0) {
@@ -185,10 +184,10 @@ $("#submit").on("click", function() {
                 }
               }
               // add the instructions to dHtml
-              dHtml += '</ul></div><div class="drink-inst"><h5>Instructions</h5>' + results2.strInstructions.trim() + '</div>\n';
+              dHtml += '</ul></div><div class="drink-inst"><h5>Instructions:</h5><p>' + results2.strInstructions.trim() + '</p></div>\n';
               // if a glass type exists, add it to the dHtml
               if (results2.strGlass.length > 0) {
-                dHtml += '<div class="drink-glass"><h5>' + results2.strGlass.trim() + '</h5></div>\n';
+                dHtml += '<div class="drink-glass"><h5>Shop for <span class="shp">' + results2.strGlass.trim().toLowerCase() + '</span></h5></div>\n';
               }
               dHtml += '<div class="shop-results"></div>';
 
@@ -198,9 +197,7 @@ $("#submit").on("click", function() {
               newDiv.classList.add("mx-2");
               newDiv.classList.add("px-0");
               newDiv.innerHTML = dHtml;
-              console.log(newDiv);
               document.getElementById("drink-list").appendChild(newDiv);
-              //console.log(dHtml);
               $(".drink-info, .drink-inst, .drink-glass, .shop-results").hide();
             }
           });
@@ -245,8 +242,8 @@ function openModal() {
     swipeToSlide: true,
     infinite: true,
     centerMode: true,
-    slidesToShow: 2,
-    slidesToScroll: 1
+    slidesToShow: 3,
+    slidesToScroll: 2,
   });
 };
 
@@ -267,9 +264,11 @@ function shopForGlass() {
   // save the drink type
   var drinkOfChoice = thisVar.find(".shop-results");
   // save the glass type text which precedes the button
-  glass = thisVar.find(".drink-glass").text();
+  glass = thisVar.find(".shp").text();
+  console.log(glass);
   // builds the API request URL to get cocktail name results
   var queryURL = "https://api.walmartlabs.com/v1/search?apiKey=vcn53dyhzmzmxzmg2krfxddy&query=" + glass + "&categoryId=4044&sort=bestseller";
+   console.log(queryURL);
   // AJAX request
   $.ajax({
       url: queryURL,
@@ -287,22 +286,45 @@ function shopForGlass() {
       for (s = 0; s < shopRecos.length; s++) {
         // verify the recommendation is available for online purchase
         if (shopRecos[s].availableOnline) {
-          // build a new LI
-          var resultLI = $("<div>");
-          // add the .recommendation class to the li
-          resultLI.addClass("recommendation");
-          // build the text for the li
-          resultLI.text(shopRecos[s].name + " : " + shopRecos[s].salePrice);
+
+          // create a new img element
           var resultImg = ($("<img>"));
+          // add the API's product image URL to the img element
           resultImg.attr("src", shopRecos[s].imageEntities[0].largeImage);
-          resultLI.prepend(resultImg);
-          console.log(resultLI.html());
-          // append the li to the ul parent
-          productRecoUL.append(resultLI);
-          console.log(productRecoUL.html());
+
+          // create a new p element for the product name
+          var name = ($("<p>"));
+          // add the API's product text to the p element
+          if (shopRecos[s].name.length > 40) {
+            name.text((shopRecos[s].name).substring(0, 40) + "...");
+          } else {
+            name.text((shopRecos[s].name));
+          };
+          
+
+          // create a new p element for the price
+          var price = ($("<p>"));
+          price.text("$" + (shopRecos[s].salePrice).toFixed(2));
+
+          //create the a href element & append to productRecoUL
+          var recoLink = $('<a>',{
+              href: shopRecos[s].productUrl,
+              target: "_blank"
+          });
+
+          // build a new div
+          var resultDiv = $("<div>", {
+            class: "reccomendation"
+          });
+
+          // Append/prepend everything
+          recoLink.append(resultImg).append(name);
+          resultDiv.append(recoLink).append(price);
+          productRecoUL.prepend(resultDiv);
+
          }; // if statement
       }; //end loop
-      console.log(productRecoUL.html());
+      // console.log(productRecoUL.html());
       // call the openModal function
       openModal();
   });
