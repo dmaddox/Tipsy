@@ -37,6 +37,7 @@ function addAlcohol() {
     var newAlc = $("<li>");
     newAlc.text(atype);
     $("#liquors").append(newAlc);
+    newAlc.append(" " + '<img src="assets/glyphicons-198-remove-circle.png">');
     $("#alcohol").val("");
     filterAlc.push(atype);
   }
@@ -48,6 +49,7 @@ function addMixer() {
     var newMix = $("<li>");
     newMix.text(mtype);
     $("#mixers").append(newMix);
+    newMix.append(" " + '<img src="assets/glyphicons-198-remove-circle.png">');
     $("#mixer").val("");
     filterMix.push(mtype);
   }
