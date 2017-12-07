@@ -56,10 +56,18 @@ function addMixer() {
 }
 
 $(document.body).on("click", ".alcIcon", function() {
-  $(this).parent().remove();
+  var takeOffAlc = $(this).parent().text()
+  console.log(takeOffAlc)
+  var AlcIndex = filterAlc.indexOf(takeOffAlc)
+  filterAlc.splice(AlcIndex, 1);
+   $(this).parent().remove();
   });
 
 $(document.body).on("click", ".mixIcon", function() {
+  var takeOffMix = $(this).parent().text()
+  console.log(takeOffMix)
+  var mixIndex = filterMix.indexOf(takeOffMix)
+  filterMix.splice(mixIndex, 1)
   $(this).parent().remove();
   });
 
