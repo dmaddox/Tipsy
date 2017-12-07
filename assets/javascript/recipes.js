@@ -37,7 +37,7 @@ function addAlcohol() {
     var newAlc = $("<li>");
     newAlc.text(atype);
     $("#liquors").append(newAlc);
-    newAlc.append(" " + '<img src="assets/glyphicons-198-remove-circle.png">');
+    newAlc.append(" " + '<img src="assets/glyphicons-198-remove-circle.png" class="icon">');
     $("#alcohol").val("");
     filterAlc.push(atype);
   }
@@ -49,11 +49,15 @@ function addMixer() {
     var newMix = $("<li>");
     newMix.text(mtype);
     $("#mixers").append(newMix);
-    newMix.append(" " + '<img src="assets/glyphicons-198-remove-circle.png">');
+    newMix.append(" " + '<img src="assets/glyphicons-198-remove-circle.png" class="icon">');
     $("#mixer").val("");
     filterMix.push(mtype);
   }
 }
+
+$(document.body).on("click", ".icon", function() {
+  $(this).parent().remove();
+    });
 
 // load alcohol filters into first dropdown
 for (i = 0; i < alcList.length; i++) {
