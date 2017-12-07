@@ -19,12 +19,18 @@ h5 {
 	color: white;
 	text-align: center;
 	background-image: linear-gradient(to bottom, rgba(255,255,255,0.3) 0%,rgba(255,255,255,0.3) 100%), url("pouring.jpg");
+	overflow: auto;
 }
 .form-group {
 
 }
 .card {
 	background-color: black;
+	text-align: center;
+	margin: 25px auto;
+}
+.card li {
+	list-style-type: none;
 }
 .list-group-item {
 	color: black;
