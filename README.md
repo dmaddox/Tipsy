@@ -2,7 +2,7 @@
 Search & display drink recipes based on alcohols and mixers provided by the user.
 
 
-### Use Tipsy Here: https://dmaddox.github.io/project_one/
+### Use Tipsy Here: https://dmaddox.github.io/Tipsy/
 
 ### Directions for use:
 1. Select & add the types of alcohol you have on hand.
