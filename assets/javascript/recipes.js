@@ -125,7 +125,6 @@ $("#submit").on("click", function() {
       // console.log(drinkIds);
       document.getElementById("drink-list").innerHTML = "";
       if (drinkIds.length > 0) {
-        console.log("drinksIds array has stuff");
         for (j = 0; j < drinkIds.length; j++) {
           // 2nd API call to get recipe details
           var qURL2 = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=" + drinkIds[j];
@@ -178,7 +177,7 @@ $("#submit").on("click", function() {
               cocktails.push(results2);
               dHtml += '<div class="drink-name"><h4>' + results2.strDrink.trim() + '</h4></div>\n' +
                         '<div class="drink-img">\n' +
-                        '<img class="img-fluid" src="' + results2.strDrinkThumb.trim() + '" ">\n' +
+                        '<img src="https://' + results2.strDrinkThumb.trim() + '" class="img-fluid" >\n' +
                         '</div>\n' +
                         '<div class="drink-info">\n' +
                         '<h5>Ingredients:</h5><ul>\n';
